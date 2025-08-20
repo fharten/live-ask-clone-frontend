@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #ffffff;
@@ -23,4 +23,41 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.card::after,
+.card::before {
+  --angle: 0deg;
+  content: '';
+  position: absolute;
+  height: 108%;
+  width: 101%;
+  background-image: conic-gradient(#05df72);
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: -1;
+  padding: 30px;
+  border-radius: 5px;
+  /* animation: 3s rotate linear infinite; */
+}
+
+.card::before {
+  filter: blur(2rem);
+  opacity: 0.2;
+}
+
+@keyframes rotate {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
 }
