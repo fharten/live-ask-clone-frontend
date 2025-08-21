@@ -1,5 +1,9 @@
 import { notFound } from 'next/navigation';
-import { getEventById, getQuestionsById, postQuestion } from '@/app/actions';
+import {
+  getEventById,
+  getQuestionsByEvent,
+  createQuestion,
+} from '@/app/lib/actions';
 import { MessageSquareHeart, MessageSquareQuote } from 'lucide-react';
 import QuestionComponent from '@/app/components/QuestionComponent';
 
@@ -10,7 +14,7 @@ export default async function EventPage({
 }) {
   const { id } = await params;
   const event = await getEventById(id);
-  const questions = await getQuestionsById(id);
+  const questions = await getQuestionsByEvent(id);
   let likesOverall = 0;
 
   for (let i = 0; i < questions.length; i++) {
@@ -32,8 +36,8 @@ export default async function EventPage({
       </div>
 
       <section className='flex flex-col max-w-2xl mx-auto min-h-screen mt-10'>
-        <form action={postQuestion} className='flex flex-col mb-12'>
-          <input name='id' value={id} type='hidden' />
+        <form action={createQuestion} className='flex flex-col mb-12'>
+          <input name='sessionId' value={id} type='hidden' />
           <textarea
             name='question'
             className='mb-4 bg-stone-50 text-stone-900 px-4 py-1'

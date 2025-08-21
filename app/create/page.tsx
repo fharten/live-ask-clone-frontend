@@ -1,4 +1,4 @@
-import { createEvent } from '../actions';
+import { createEvent } from '../lib/actions';
 import MainWrapper from '../components/MainWrapper';
 
 const CreatePage = () => {
